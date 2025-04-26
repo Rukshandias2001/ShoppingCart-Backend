@@ -29,8 +29,6 @@ public class SecurityConfig {
     }
 
 
-
-
     @Bean
     public JwtFilter jwtFilter() {
         return new JwtFilter(jwtService);
@@ -44,6 +42,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
+
     }
 }
 
