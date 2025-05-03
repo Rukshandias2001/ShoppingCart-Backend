@@ -11,4 +11,6 @@ public interface OrderService {
 
     public ArrayList<State> getStateList(int countryId);
 
+    public Orders getRecieptOrder(String email);
+
 }

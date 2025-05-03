@@ -150,4 +150,11 @@ public class OrderServiceImpl implements OrderService {
             }
         });
     }
+
+    public Orders getRecieptOrder(String email) {
+        User user = userRepository.findByEmail(email).get();
+       Orders order =  orderRepository.findOrdersByUserId(user.getId());
+       return order;
+
+    }
 }

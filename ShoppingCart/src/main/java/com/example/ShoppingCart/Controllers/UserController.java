@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -51,18 +54,17 @@ public class UserController {
         order.setPrice(orderRequest.getPrice());
         order.setCvv(orderRequest.getCvv());
         order.setCardType(orderRequest.getCardType());
-        order.setPaidDate(orderRequest.getDate());
-        // Create a SimpleDateFormat for the desired format
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        // Get today's date and format it to "yyyy-MM-dd" format
-        String formattedDate = dateFormat.format(new Date());
-        // Parse the formatted date string back into a Date object
-        Date parsedDate = null;
-        try {
-            parsedDate = dateFormat.parse(formattedDate);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        // Create a DateTimeFormatter for date and time
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+// Get current date and time and format it
+        String formattedDate = LocalDateTime.now().format(formatter);
+
+// Parse the formatted date string back into a Date object (if needed)
+        Date parsedDate = Date.from(LocalDateTime.parse(formattedDate, formatter)
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+
         order.setDate(parsedDate);
 
         CreditCards creditCards = new CreditCards();
@@ -91,6 +93,13 @@ public class UserController {
         ArrayList<State> stateList = orderService.getStateList(id);
         return ResponseEntity.ok(stateList);
     }
+
+
+    @PostMapping("/GetReciept")
+    public ResponseEntity<?> getRecieptById(@RequestParam(defaultValue = "") String email) {
+        return ResponseEntity.ok(orderService.getRecieptOrder(email));
+    }
+
 
 
 
