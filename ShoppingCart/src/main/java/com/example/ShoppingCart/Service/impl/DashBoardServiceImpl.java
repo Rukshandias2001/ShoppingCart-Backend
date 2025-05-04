@@ -1,9 +1,6 @@
 package com.example.ShoppingCart.Service.impl;
 
-import com.example.ShoppingCart.DTO.CustomerDTO;
-import com.example.ShoppingCart.DTO.DashBoardRevenueDTO;
-import com.example.ShoppingCart.DTO.MonthlyIncomeDTO;
-import com.example.ShoppingCart.DTO.ProductDTO;
+import com.example.ShoppingCart.DTO.*;
 import com.example.ShoppingCart.Entities.User;
 import com.example.ShoppingCart.Repository.OrderRepository;
 import com.example.ShoppingCart.Repository.ProductRepository;
@@ -88,8 +85,15 @@ public class DashBoardServiceImpl implements DashBoardService {
     }
 
 
-    public ArrayList<ProductDTO> getIncomeSalesForElectronics(){
-        return null;
+    public ArrayList<ProductRevenueDTO> getIncomeSalesForElectronics(String type){
+        ArrayList<ProductRevenueDTO> productRevenueDTOS = productRepository.numberOfSoldProductRevenues(type);
+        return  productRevenueDTOS;
+    }
+
+    @Override
+    public ArrayList<ProductRevenueDTO> getIncomeSalesForClothing(String type) {
+        ArrayList<ProductRevenueDTO> productRevenueDTOS = productRepository.numberOfSoldProductRevenues(type);
+        return productRevenueDTOS;
     }
 
 

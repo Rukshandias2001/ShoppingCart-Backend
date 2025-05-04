@@ -1,9 +1,6 @@
 package com.example.ShoppingCart.Service;
 
-import com.example.ShoppingCart.DTO.CustomerDTO;
-import com.example.ShoppingCart.DTO.DashBoardRevenueDTO;
-import com.example.ShoppingCart.DTO.MonthlyIncomeDTO;
-import com.example.ShoppingCart.DTO.ProductDTO;
+import com.example.ShoppingCart.DTO.*;
 
 import java.util.ArrayList;
 
@@ -24,5 +21,9 @@ public interface DashBoardService {
     public ArrayList<ProductDTO> getSoldClothing();
 
     public ArrayList<MonthlyIncomeDTO> getMonthlyIncome();
+
+    public ArrayList<ProductRevenueDTO> getIncomeSalesForElectronics(String type);
+
+    public ArrayList<ProductRevenueDTO> getIncomeSalesForClothing(String type);
 
 }

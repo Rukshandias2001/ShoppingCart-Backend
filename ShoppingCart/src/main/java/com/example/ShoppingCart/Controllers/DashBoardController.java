@@ -1,17 +1,12 @@
 package com.example.ShoppingCart.Controllers;
 
-import com.example.ShoppingCart.DTO.CustomerDTO;
-import com.example.ShoppingCart.DTO.DashBoardRevenueDTO;
-import com.example.ShoppingCart.DTO.MonthlyIncomeDTO;
-import com.example.ShoppingCart.DTO.ProductDTO;
+import com.example.ShoppingCart.DTO.*;
 import com.example.ShoppingCart.Service.DashBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,5 +46,21 @@ public class DashBoardController {
         List<MonthlyIncomeDTO> monthlyIncome = dashBoardService.getMonthlyIncome();
         return ResponseEntity.ok(monthlyIncome);
     }
+
+    @PostMapping("/getRevenueElectronics")
+    public ResponseEntity<?> getRevenueElectronics(@RequestParam("type")String type){
+        ArrayList<ProductRevenueDTO> incomeSalesForElectronics = dashBoardService.getIncomeSalesForElectronics(type);
+        return ResponseEntity.ok(incomeSalesForElectronics);
+
+    }
+
+    @PostMapping("/getRevenueClothing")
+    public ResponseEntity<?> getRevenueClothings(@RequestParam("type")String type){
+        ArrayList<ProductRevenueDTO> incomeSalesForClothing = dashBoardService.getIncomeSalesForClothing(type);
+        return ResponseEntity.ok(incomeSalesForClothing);
+    }
+
+
+
 
 }
