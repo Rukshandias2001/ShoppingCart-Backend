@@ -6,6 +6,7 @@ import com.example.ShoppingCart.Service.CartItemService;
 import com.example.ShoppingCart.Service.OrderService;
 import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -100,6 +101,12 @@ public class UserController {
         return ResponseEntity.ok(orderService.getRecieptOrder(email));
     }
 
+    @GetMapping("/getOrdersPerUser")
+    public ResponseEntity<?> getOrdersPerUser(@RequestParam(defaultValue = "") String email,@RequestParam(defaultValue = "0")String pageNumber) {
+        int convertedPageNumber = Integer.parseInt(pageNumber);
+        Page<Orders> listOfOrderByUser = orderService.getListOfOrderByUser(email, convertedPageNumber);
+        return ResponseEntity.ok(listOfOrderByUser);
+    }
 
 
 

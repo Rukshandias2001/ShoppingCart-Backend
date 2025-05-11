@@ -7,6 +7,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -157,4 +160,12 @@ public class OrderServiceImpl implements OrderService {
        return order;
 
     }
+
+    public Page<Orders> getListOfOrderByUser(String email,int pageNumber){
+        User user = userRepository.findByEmail(email).get();
+        Pageable pageable = PageRequest.of(pageNumber,10);
+        Page<Orders> ordersByUserId = orderRepository.getOrdersByUserId(user.getId(),pageable);
+        return  ordersByUserId;
+    }
+
 }

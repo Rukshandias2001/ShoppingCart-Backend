@@ -1,6 +1,7 @@
 package com.example.ShoppingCart.Service;
 
 import com.example.ShoppingCart.Entities.*;
+import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 
@@ -12,5 +13,7 @@ public interface OrderService {
     public ArrayList<State> getStateList(int countryId);
 
     public Orders getRecieptOrder(String email);
+
+    public Page<Orders> getListOfOrderByUser(String email, int pageNumber);
 
 }

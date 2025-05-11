@@ -53,7 +53,21 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        Optional<Product> getProduct = productRepository.findById(product.getId());
+        if(getProduct.isPresent()) {
+            Product updatedProduct = getProduct.get();
+            updatedProduct.setName(product.getName());
+            updatedProduct.setDescription(product.getDescription());
+            updatedProduct.setPrice(product.getPrice());
+            updatedProduct.setQuantity(product.getQuantity());
+            Product save = productRepository.save(updatedProduct);
+            return save;
+
+        }else{
+            return null;
+        }
+
+
     }
 
     @Override

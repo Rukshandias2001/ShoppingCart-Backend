@@ -93,6 +93,15 @@ public class ProductController {
         return  ResponseEntity.ok().body(productById);
     }
 
+    @PatchMapping("updateProduct")
+    public ResponseEntity<?> updateProduct(@RequestBody Product product) {
+        Product product1 = managerService.updateProduct(product);
+        if (product1 != null) {
+            return ResponseEntity.ok().body(product1); // success
+        } else {
+            return ResponseEntity.badRequest().body("Operation unsuccessful"); // failed
+        }
+    }
 
 
 

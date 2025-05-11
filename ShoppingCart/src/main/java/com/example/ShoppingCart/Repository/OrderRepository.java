@@ -51,6 +51,8 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
     ArrayList<MonthlyIncomeDTO> getMonthlyIncomeList();
 
 
+    @Query(value = "select * from `order` where user_id =:userId ",nativeQuery = true)
+    Page<Orders> getOrdersByUserId(@Param("userId") int userId,Pageable pageable);
 
 
 
