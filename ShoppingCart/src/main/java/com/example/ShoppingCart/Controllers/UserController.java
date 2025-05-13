@@ -108,6 +108,12 @@ public class UserController {
         return ResponseEntity.ok(listOfOrderByUser);
     }
 
+    @GetMapping("/getOrderById/{id}")
+    public  ResponseEntity<?> getOrdersbyOrderId(@PathVariable int id){
+        ArrayList<Reciept> listOfReceipts = orderService.getListOfReceipts(id);
+        return  ResponseEntity.ok(listOfReceipts);
+
+    }
 
 
 }

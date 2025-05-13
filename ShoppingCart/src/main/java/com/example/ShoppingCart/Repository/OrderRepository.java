@@ -4,6 +4,7 @@ import com.example.ShoppingCart.DTO.CustomerDTO;
 import com.example.ShoppingCart.DTO.MonthlyIncomeDTO;
 import com.example.ShoppingCart.Entities.Orders;
 
+import com.example.ShoppingCart.Entities.Reciept;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -53,6 +54,12 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
 
     @Query(value = "select * from `order` where user_id =:userId ",nativeQuery = true)
     Page<Orders> getOrdersByUserId(@Param("userId") int userId,Pageable pageable);
+
+
+    @Query(value ="select o.price,t.id,t.image,t.product_name,t.quantity from `order` o inner join product_order_table p \n" +
+            "on o.order_id = p.order_id\n" +
+            "inner join ordered_product_list t ON t.order_id = o.order_id where o.order_id =:orderId group by t.image ",nativeQuery = true)
+    ArrayList<Reciept> getRecieptList(@Param("orderId")int order_id);
 
 
 

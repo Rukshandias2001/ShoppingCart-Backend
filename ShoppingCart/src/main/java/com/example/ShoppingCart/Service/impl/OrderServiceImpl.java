@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -167,5 +166,14 @@ public class OrderServiceImpl implements OrderService {
         Page<Orders> ordersByUserId = orderRepository.getOrdersByUserId(user.getId(),pageable);
         return  ordersByUserId;
     }
+
+    public ArrayList<Reciept> getListOfReceipts(int order_id){
+        ArrayList<Reciept> recieptList = orderRepository.getRecieptList(order_id);
+        return  recieptList;
+
+    }
+
+
+
 
 }

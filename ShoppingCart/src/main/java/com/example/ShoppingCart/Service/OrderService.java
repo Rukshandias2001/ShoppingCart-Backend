@@ -16,4 +16,6 @@ public interface OrderService {
 
     public Page<Orders> getListOfOrderByUser(String email, int pageNumber);
 
+    public ArrayList<Reciept> getListOfReceipts(int order_id);
+
 }
