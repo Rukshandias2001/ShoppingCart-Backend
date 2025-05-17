@@ -6,6 +6,7 @@ import com.example.ShoppingCart.Config.CloudinaryConfig;
 import com.example.ShoppingCart.Entities.Clothing;
 import com.example.ShoppingCart.Entities.Electronic;
 import com.example.ShoppingCart.Entities.Product;
+import com.example.ShoppingCart.Entities.User;
 import com.example.ShoppingCart.Repository.ProductRepository;
 import com.example.ShoppingCart.Service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,5 +108,7 @@ public class ManagerServiceImpl implements ManagerService {
         return product;
     }
 
+
+    
 
 }
